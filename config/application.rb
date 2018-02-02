@@ -18,14 +18,26 @@ Bundler.require(*Rails.groups)
 
 module Ama
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
-
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-
-    # Don't generate system test files.
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
+    config.i18n.default_locale = :ja
+    config.paths.add "lib", eager_load: true
     config.generators.system_tests = nil
+    config.action_view.form_with_generates_remote_forms = false
+    config.action_view.prefix_partial_path_with_controller_namespace = false
+    config.generators do |g|
+      g.orm :active_record
+      g.assets false
+      g.helper false
+      g.template_engine :haml
+      g.test_framework :rspec, view_specs:       false,
+                               controller_specs: false,
+                               helper_specs:     false,
+                               routing_specs:    false,
+                               request_specs:    false,
+                               fixture:          true
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
   end
 end
