@@ -18,6 +18,7 @@ gem "sass-rails", "~> 5.0"
 gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 gem "validates_email_format_of"
+gem "webpacker", "~> 3.2"
 
 group :development, :test do
   gem "awesome_print"
