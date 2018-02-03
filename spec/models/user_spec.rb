@@ -30,22 +30,6 @@ RSpec.describe User, type: :model do
     it { expect(build(:user, email: "id+user-name@users.noreply.github.com")).to be_valid }
   end
 
-  describe "#gravatar_id" do
-    subject { user.gravatar_id }
-
-    let(:user) { build(:user) }
-
-    it { is_expected.to eq Digest::MD5.hexdigest(user.email.downcase) }
-  end
-
-  describe "#gravatar_url" do
-    subject { user.gravatar_url }
-
-    let(:user) { build(:user) }
-
-    it { is_expected.to eq "https://www.gravatar.com/avatar/#{user.gravatar_id}" }
-  end
-
   describe "remember_token" do
     subject { user.remember_token }
 
