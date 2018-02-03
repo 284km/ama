@@ -1,3 +1,2 @@
-%ul
-  - flash.each do |type, message|
-    %li{ class: type }= message
+- flash.each do |type, message|
+  .alert{ class: "alert-#{type}" }= message
