@@ -1,6 +1,10 @@
 module UserDecorator
+  def github_url
+    "https://github.com/#{nickname}"
+  end
+
   def gravatar_url
-    @gravatar_url ||= "https://www.gravatar.com/avatar/#{gravatar_id}"
+    "https://www.gravatar.com/avatar/#{gravatar_id}"
   end
 
   def gravatar_id
