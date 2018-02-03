@@ -18,8 +18,8 @@
 
 FactoryBot.define do
   factory :user do
-    github_id 1
-    email "MyString"
-    remember_token "MyString"
+    sequence(:github_id)
+    email    { Faker::Internet.unique.email }
+    nickname { Faker::Name.name }
   end
 end

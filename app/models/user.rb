@@ -17,4 +17,25 @@
 #
 
 class User < ApplicationRecord
+  validates :github_id, presence: true, uniqueness: true
+  validates :email,     presence: true, email_format: true
+  validates :nickname,  presence: true
+
+  def gravatar_url
+    @gravatar_url ||= "https://www.gravatar.com/avatar/#{gravatar_id}"
+  end
+
+  def gravatar_id
+    Digest::MD5.hexdigest(email.downcase)
+  end
+
+  before_save do
+    self.remember_token ||= generate_remember_token
+  end
+
+  private
+
+    def generate_remember_token
+      SecureRandom.hex(20)
+    end
 end
