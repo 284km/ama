@@ -46,5 +46,6 @@ group :development do
   gem "onkcop", require: false
   gem "rails-erd"
   gem "spring"
+  gem "spring-commands-rspec"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
