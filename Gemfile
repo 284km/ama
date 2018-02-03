@@ -4,6 +4,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem "rails", "~> 5.1"
 
+gem "active_decorator"
 gem "bootsnap", require: false
 gem "coffee-rails", "~> 4.2"
 gem "gretel"
@@ -11,6 +12,7 @@ gem "hamlit-rails"
 gem "kaminari"
 gem "kaminari-i18n"
 gem "meta-tags"
+gem "omniauth-github"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.7"
 gem "rails-i18n"
@@ -24,6 +26,7 @@ group :development, :test do
   gem "awesome_print"
   gem "capybara"
   gem "chromedriver-helper"
+  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "hirb-unicode-steakknife"
@@ -43,5 +46,6 @@ group :development do
   gem "onkcop", require: false
   gem "rails-erd"
   gem "spring"
+  gem "spring-commands-rspec"
   gem "spring-watcher-listen", "~> 2.0.0"
 end

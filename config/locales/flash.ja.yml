@@ -1,0 +1,4 @@
+ja:
+  flash:
+    logged_in: "認証に成功しました"
+    logged_out: "ログアウトしました"
