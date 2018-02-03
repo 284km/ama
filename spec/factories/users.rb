@@ -20,6 +20,6 @@ FactoryBot.define do
   factory :user do
     sequence(:github_id)
     email    { Faker::Internet.unique.email }
-    nickname { Faker::Name.name }
+    nickname { Faker::Internet.user_name }
   end
 end
