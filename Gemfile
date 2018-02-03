@@ -25,6 +25,7 @@ group :development, :test do
   gem "awesome_print"
   gem "capybara"
   gem "chromedriver-helper"
+  gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "hirb-unicode-steakknife"
