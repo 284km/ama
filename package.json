@@ -2,7 +2,8 @@
   "name": "ama",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.2.1"
+    "@rails/webpacker": "^3.2.1",
+    "bootstrap": "^4.0.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.11.1"
