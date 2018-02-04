@@ -2,11 +2,11 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.eager_load(:user).page(params[:page])
+    @topics = Topic.eager_load(:user).order(id: :asc).page(params[:page])
   end
 
   def show
-    @comments = @topic.comments.eager_load(:user).page(params[:page])
+    @comments = @topic.comments.eager_load(:user).order(likes_count: :desc).page(params[:page])
   end
 
   def new
