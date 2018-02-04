@@ -17,6 +17,8 @@ ja:
         gravatar_url: "Gravatar URL"
         email: "メールアドレス"
         nickname: "ユーザー名"
+        comments_count: "コメント"
+        likes_count: "いいね"
       topic:
         user_id: "作成者"
         title: "タイトル"
