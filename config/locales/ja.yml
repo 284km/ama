@@ -1,4 +1,5 @@
 ja:
-  sessions:
-    new:
-      login: "login with GitHub"
+  application:
+    navbar:
+      login: "GitHubで新規登録/ログイン"
+      logout: "ログアウト"
