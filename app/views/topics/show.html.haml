@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @topic.user
+%p
+  %b Title:
+  = @topic.title
+%p
+  %b Description:
+  = @topic.description
+%p
+  %b Comments count:
+  = @topic.comments_count
+
+= link_to 'Edit', edit_topic_path(@topic)
+\|
+= link_to 'Back', topics_path
