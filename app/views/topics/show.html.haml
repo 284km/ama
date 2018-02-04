@@ -1,18 +1,14 @@
-%p#notice= notice
+- breadcrumb :resource, @topic
 
-%p
-  %b User:
-  = @topic.user
-%p
-  %b Title:
-  = @topic.title
-%p
-  %b Description:
-  = @topic.description
-%p
-  %b Comments count:
-  = @topic.comments_count
+= attributes_table_for @topic do |t|
+  - t.row :id
+  - t.row :title
+  - t.row :description do |topic|
+    = simple_format(topic.description)
+  - t.row :user_id do |topic|
+    = link_to topic.user.nickname, "#"
+  - t.row :comments_count
+  - t.row :created_at
+  - t.row :updated_at
 
-= link_to 'Edit', edit_topic_path(@topic)
-\|
-= link_to 'Back', topics_path
+= link_to t("shared.edit"), [:edit, @topic], class: "btn btn-dark"

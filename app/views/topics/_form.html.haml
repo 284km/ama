@@ -1,22 +1,11 @@
-= form_for @topic do |f|
-  - if @topic.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@topic.errors.count, "error")} prohibited this topic from being saved:"
-      %ul
-        - @topic.errors.full_messages.each do |msg|
-          %li= msg
+= form_with model: topic do |form|
+  = render "error_messages", messages: topic.errors.full_messages if topic.errors.any?
 
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :comments_count
-    = f.number_field :comments_count
+  .form-group
+    = form.text_field :title, class: "form-control", required: false, placeholder: Topic.human_attribute_name(:title)
+
+  .form-group
+    = form.text_area :description, class: "form-control", required: false, placeholder: Topic.human_attribute_name(:description), rows: 10
+
   .actions
-    = f.submit 'Save'
+    = form.submit class: "btn btn-primary"

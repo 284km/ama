@@ -6,3 +6,9 @@ ja:
     navbar:
       login: "GitHubで新規登録/ログイン"
       logout: "ログアウト"
+  shared:
+    new: "新規作成"
+    show: "詳細"
+    edit: "編集"
+    destroy: "削除"
+    confirm: "本当によろしいですか?"

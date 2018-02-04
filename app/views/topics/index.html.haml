@@ -1,27 +1,23 @@
-%h1 Listing topics
+- breadcrumb :resources, Topic
 
-%table
-  %thead
-    %tr
-      %th User
-      %th Title
-      %th Description
-      %th Comments count
-      %th
-      %th
-      %th
+.row
+  .col-9
+    = table_for @topics do |t|
+      - t.column :id
+      - t.column :title
+      - t.column :user_id do |topic|
+        = link_to topic.user.nickname, "#"
+      - t.column :comments_count
+      - t.column do |topic|
+        = link_to t("shared.show"), topic, class: "btn btn-sm btn-dark"
+        = link_to t("shared.edit"), [:edit, topic], class: "btn btn-sm btn-dark"
+        = link_to t("shared.destroy"), topic, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
 
-  %tbody
-    - @topics.each do |topic|
-      %tr
-        %td= topic.user
-        %td= topic.title
-        %td= topic.description
-        %td= topic.comments_count
-        %td= link_to 'Show', topic
-        %td= link_to 'Edit', edit_topic_path(topic)
-        %td= link_to 'Destroy', topic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    = paginate @topics
 
-%br
-
-= link_to 'New Topic', new_topic_path
+  .col-3
+    .card
+      .card-header
+        %strong= t("shared.new")
+      .card-body
+        = render 'form', topic: Topic.new
