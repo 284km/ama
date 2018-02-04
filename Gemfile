@@ -15,7 +15,6 @@ gem "omniauth-github"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.7"
 gem "rails-i18n"
-gem "uglifier", ">= 1.3.0"
 gem "validates_email_format_of"
 gem "webpacker", "~> 3.2"
 
