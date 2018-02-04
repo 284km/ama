@@ -1,0 +1,19 @@
+- breadcrumb :resources, Comment
+
+= table_for @comments do |t|
+  - t.column :id
+  - t.column :topic_id do |comment|
+    = link_to comment.topic.title.truncate(16), comment.topic, class: "text-dark"
+  - t.column :user_id do |comment|
+    = link_to comment.user.nickname, comment.user, class: "text-dark"
+  - t.column :content do |comment|
+    = comment.content.truncate(24)
+  - t.column :likes_count
+  - t.column :created_at
+  - t.column :updated_at
+  - t.column do |comment|
+    = link_to t("shared.show"), comment, class: "btn btn-sm btn-dark"
+    = link_to t("shared.edit"), [:edit, comment], class: "btn btn-sm btn-dark"
+    = link_to t("shared.destroy"), comment, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
+
+= paginate @comments

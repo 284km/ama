@@ -7,6 +7,7 @@ ja:
       login: "GitHubで新規登録/ログイン"
       logout: "ログアウト"
   shared:
+    home: "HOME"
     new: "新規作成"
     show: "詳細"
     edit: "編集"

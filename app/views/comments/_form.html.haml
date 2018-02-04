@@ -1,0 +1,9 @@
+= form_with model: comment do |form|
+  = render "error_messages", messages: comment.errors.full_messages if comment.errors.any?
+  = form.hidden_field :topic_id
+
+  .form-group
+    = form.text_area :content, class: "form-control", required: true, placeholder: Comment.human_attribute_name(:content), rows: 10
+
+  .actions
+    = form.submit class: "btn btn-dark btn-block"

@@ -18,6 +18,7 @@
 
 class User < ApplicationRecord
   has_many :topics, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :github_id, presence: true, uniqueness: true
   validates :email,     presence: true, email_format: true

@@ -2,10 +2,10 @@
 
 = table_for @users do |t|
   - t.column :id
-  - t.column :github_id
-  - t.column :email
-  - t.column :nickname
+  - t.column :nickname do |user|
+    = link_to user.nickname, user, class: "text-dark"
   - t.column :created_at
+  - t.column :updated_at
   - t.column do |user|
     = link_to t("shared.show"), user, class: "btn btn-sm btn-dark"
 

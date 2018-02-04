@@ -5,7 +5,7 @@
         - links.each do |link|
           - if link.current?
             %li.breadcrumb-item.active{ "aria-current": "page" }
-              = link.text
+              %strong= link.text
           - else
             %li.breadcrumb-item
-              = link_to link.text, link.url
+              = link_to link.text, link.url, class: "text-muted"

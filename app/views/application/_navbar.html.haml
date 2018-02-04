@@ -11,6 +11,8 @@
           = link_to User.model_name.human, users_path, class: "nav-link"
         %li.nav-item
           = link_to Topic.model_name.human, topics_path, class: "nav-link"
+        %li.nav-item
+          = link_to Comment.model_name.human, comments_path, class: "nav-link"
       %ul.navbar-nav.my-lg-0
         %li.nav-item.dropdown
           = link_to current_user.nickname, "javascript:void(0)", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", "data-toggle": "dropdown", "aria-haspopup": true, "aria-expanded": false

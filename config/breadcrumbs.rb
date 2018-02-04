@@ -1,5 +1,5 @@
 crumb :root do
-  link "Home", root_path
+  link t("shared.home"), root_path
 end
 
 crumb :resources do |klass_or_model|
