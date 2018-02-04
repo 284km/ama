@@ -20,19 +20,15 @@ gem "webpacker", "~> 3.2"
 
 group :development, :test do
   gem "awesome_print"
-  gem "capybara"
-  gem "chromedriver-helper"
   gem "dotenv-rails"
   gem "factory_bot_rails"
   gem "faker"
   gem "hirb-unicode-steakknife"
-  gem "launchy"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
   gem "pry-stack_explorer"
   gem "rspec-rails"
-  gem "selenium-webdriver"
 end
 
 group :development do
@@ -44,4 +40,11 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "spring-watcher-listen", "~> 2.0.0"
+end
+
+group :test do
+  gem "capybara"
+  gem "chromedriver-helper"
+  gem "launchy"
+  gem "selenium-webdriver"
 end
