@@ -25,6 +25,8 @@ class Comment < ApplicationRecord
   belongs_to :topic, counter_cache: true
   belongs_to :user
 
+  has_many :likes, dependent: :destroy
+
   validates :content,     presence: true, length: { maximum: 2000 }
   validates :likes_count, presence: true
 end
