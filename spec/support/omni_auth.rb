@@ -13,6 +13,6 @@ module OmniAuthHelper
   def authenticate_as(user)
     prepare_mock_auth_from(user)
     visit login_path
-    click_link I18n.t("sessions.new.login")
+    click_link I18n.t("application.navbar.login")
   end
 end
