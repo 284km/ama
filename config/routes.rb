@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show]
   resources :topics
-  resources :comments
+  resources :comments do
+    resources :likes, only: :create
+  end
 
   root "home#index"
 end
