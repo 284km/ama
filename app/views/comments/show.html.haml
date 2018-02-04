@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Topic:
+  = @comment.topic
+%p
+  %b User:
+  = @comment.user
+%p
+  %b Content:
+  = @comment.content
+%p
+  %b Likes count:
+  = @comment.likes_count
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path
