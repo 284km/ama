@@ -6,12 +6,12 @@ class SessionsController < ApplicationController
 
   def create
     create_session
-    redirect_to referer_or_root_path, flash: { info: t("flash.logged_in") }
+    redirect_to referer_or_root_path, flash: { success: t("flash.logged_in") }
   end
 
   def destroy
     reset_session
-    redirect_to login_path, flash: { info: t("flash.logged_out") }
+    redirect_to login_path, flash: { success: t("flash.logged_out") }
   end
 
   private
