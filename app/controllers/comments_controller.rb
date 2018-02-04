@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @comments = Comment.page(params[:page])
+    @comments = Comment.order(id: :desc).page(params[:page])
   end
 
   def show

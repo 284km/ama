@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_comments_on_topic_id  (topic_id)
-#  index_comments_on_user_id   (user_id)
+#  index_comments_on_likes_count  (likes_count)
+#  index_comments_on_topic_id     (topic_id)
+#  index_comments_on_user_id      (user_id)
 #
 # Foreign Keys
 #
@@ -23,7 +24,9 @@
 
 class Comment < ApplicationRecord
   belongs_to :topic, counter_cache: true
-  belongs_to :user
+  belongs_to :user, counter_cache: true
+
+  has_many :likes, dependent: :destroy
 
   validates :content,     presence: true, length: { maximum: 2000 }
   validates :likes_count, presence: true

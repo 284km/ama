@@ -9,7 +9,8 @@
     %p.text-right
       Posted by
       = link_to @topic.user.nickname, @topic.user, class: "text-dark"
-      (#{l(@topic.updated_at)})
+      %span.text-muted
+        = l(@topic.updated_at)
 
     %p.h4.mb-4
       %i.far.fa-comment-alt
@@ -20,25 +21,15 @@
     - @comments.each do |comment|
       = simple_format(comment.content)
       %p.text-right
-        = link_to "#" do
+        = link_to [comment, :likes], method: :post do
           %i.far.fa-thumbs-up
-          いいね(#{comment.likes_count})
+          #{Like.model_name.human}(#{comment.likes_count})
         &nbsp;
         Posted by
         = link_to comment.user.nickname, comment.user, class: "text-dark"
-        (#{l(comment.updated_at)})
+        %span.text-muted
+          = l(comment.updated_at)
       %hr
-
-    /
-      = table_for @comments do |t|
-        - t.column :id
-        - t.column :user_id do |comment|
-          = link_to comment.user.nickname, comment.user
-        - t.column :content
-        - t.column :likes_count
-        - t.column do |comment|
-          = link_to t("shared.edit"), [:edit, comment], class: "btn btn-sm btn-dark"
-          = link_to t("shared.destroy"), comment, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
 
     = paginate @comments
   .col-3

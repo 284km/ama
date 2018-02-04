@@ -9,6 +9,8 @@
 #  remember_token :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  comments_count :integer          default(0), not null
+#  likes_count    :integer          default(0), not null
 #
 # Indexes
 #
@@ -19,10 +21,13 @@
 class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
-  validates :github_id, presence: true, uniqueness: true
-  validates :email,     presence: true, email_format: true
-  validates :nickname,  presence: true
+  validates :github_id,      presence: true, uniqueness: true
+  validates :email,          presence: true, email_format: true
+  validates :nickname,       presence: true
+  validates :comments_count, presence: true
+  validates :likes_count,    presence: true
 
   before_save do
     self.remember_token ||= generate_remember_token

@@ -5,7 +5,13 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show]
   resources :topics
-  resources :comments
+  resources :comments do
+    resources :likes, only: :create
+  end
+
+  direct :github_repository do
+    "https://github.com/railsdm/ama"
+  end
 
   root "home#index"
 end

@@ -12,8 +12,9 @@
 #
 # Indexes
 #
-#  index_comments_on_topic_id  (topic_id)
-#  index_comments_on_user_id   (user_id)
+#  index_comments_on_likes_count  (likes_count)
+#  index_comments_on_topic_id     (topic_id)
+#  index_comments_on_user_id      (user_id)
 #
 # Foreign Keys
 #
