@@ -2,3 +2,6 @@ ja:
   flash:
     logged_in: "認証に成功しました"
     logged_out: "ログアウトしました"
+    created: "%{resource}を作成しました"
+    updated: "%{resource}を更新しました"
+    destroyed: "%{resource}を削除しました"

@@ -2,6 +2,25 @@ crumb :root do
   link "Home", root_path
 end
 
+crumb :resources do |klass_or_model|
+  link klass_or_model.model_name.human, klass_or_model
+end
+
+crumb :new_resource do |model|
+  link t("shared.new"), model
+  parent :resources, model
+end
+
+crumb :resource do |model|
+  link model.to_key.join, model
+  parent :resources, model.class
+end
+
+crumb :edit_resource do |model|
+  link t("shared.edit"), [:edit, model]
+  parent :resource, model
+end
+
 # crumb :projects do
 #   link "Projects", projects_path
 # end

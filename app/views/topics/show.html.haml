@@ -1,0 +1,14 @@
+- breadcrumb :resource, @topic
+
+= attributes_table_for @topic do |t|
+  - t.row :id
+  - t.row :title
+  - t.row :description do |topic|
+    = simple_format(topic.description)
+  - t.row :user_id do |topic|
+    = link_to topic.user.nickname, "#"
+  - t.row :comments_count
+  - t.row :created_at
+  - t.row :updated_at
+
+= link_to t("shared.edit"), [:edit, @topic], class: "btn btn-dark"

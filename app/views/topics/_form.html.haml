@@ -1,0 +1,11 @@
+= form_with model: topic do |form|
+  = render "error_messages", messages: topic.errors.full_messages if topic.errors.any?
+
+  .form-group
+    = form.text_field :title, class: "form-control", required: false, placeholder: Topic.human_attribute_name(:title)
+
+  .form-group
+    = form.text_area :description, class: "form-control", required: false, placeholder: Topic.human_attribute_name(:description), rows: 10
+
+  .actions
+    = form.submit class: "btn btn-primary"
