@@ -6,6 +6,7 @@ ja:
     navbar:
       login: "GitHubで新規登録/ログイン"
       logout: "ログアウト"
+      source_code: "ソースコード"
   shared:
     home: "HOME"
     new: "新規作成"

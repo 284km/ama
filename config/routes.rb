@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     resources :likes, only: :create
   end
 
+  direct :github_repository do
+    "https://github.com/railsdm/ama"
+  end
+
   root "home#index"
 end
