@@ -11,6 +11,8 @@ ja:
     attributes:
       user:
         github_id: "GitHub UID"
+        github_url: "GitHub URL"
+        gravatar_url: "Gravatar URL"
         email: "メールアドレス"
         nickname: "ユーザー名"
       topic:

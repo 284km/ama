@@ -1,25 +1,12 @@
-%h1 Listing users
+- breadcrumb :resources, User
 
-%table
-  %thead
-    %tr
-      %th Github
-      %th Email
-      %th Nickname
-      %th
-      %th
-      %th
+= table_for @users do |t|
+  - t.column :id
+  - t.column :github_id
+  - t.column :email
+  - t.column :nickname
+  - t.column :created_at
+  - t.column do |user|
+    = link_to t("shared.show"), user, class: "btn btn-sm btn-dark"
 
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.github_id
-        %td= user.email
-        %td= user.nickname
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New User', new_user_path
+= paginate @users
