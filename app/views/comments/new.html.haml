@@ -1,5 +1,2 @@
-%h1 New comment
-
-= render 'form'
-
-= link_to 'Back', comments_path
+- breadcrumb :new_resource, @comment
+= render 'form', comment: @comment

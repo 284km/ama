@@ -6,6 +6,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @comments = @topic.comments.eager_load(:user).page(params[:page])
   end
 
   def new

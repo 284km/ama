@@ -1,13 +1,28 @@
 - breadcrumb :resource, @user
 
-= attributes_table_for @user do |t|
-  - t.row :id
-  - t.row :github_id
-  - t.row :email
-  - t.row :nickname
-  - t.row :github_url do |user|
-    = link_to user.github_url, user.github_url, target: "_blank"
-  - t.row :gravatar_url do |user|
-    = image_tag user.gravatar_url, alt: ""
-  - t.row :created_at
-  - t.row :updated_at
+.row
+  .col-9
+    = table_for @comments do |t|
+      - t.column :id
+      - t.column :topic_id do |comment|
+        = link_to comment.topic.title.truncate(16), comment.topic, class: "text-dark"
+      - t.column :content do |comment|
+        = comment.content.truncate(24)
+      - t.column :likes_count
+      - t.column :created_at
+      - t.column :updated_at
+      - t.column do |comment|
+        = link_to t("shared.edit"), [:edit, comment], class: "btn btn-sm btn-dark"
+        = link_to t("shared.destroy"), comment, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
+    = paginate @comments
+
+  .col-3
+    = attributes_table_for @user do |t|
+      - t.row :id
+      - t.row :nickname
+      - t.row :github_url do |user|
+        = link_to user.github_url, user.github_url, target: "_blank", class: "text-dark"
+      - t.row :gravatar_url do |user|
+        = image_tag user.gravatar_url, width: 40, height: 40, class: :rounded, alt: ""
+      - t.row :created_at
+      - t.row :updated_at

@@ -1,59 +1,50 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # GET /comments
   def index
-    @comments = Comment.all
+    @comments = Comment.page(params[:page])
   end
 
-  # GET /comments/1
   def show
   end
 
-  # GET /comments/new
   def new
     @comment = Comment.new
   end
 
-  # GET /comments/1/edit
   def edit
   end
 
-  # POST /comments
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
 
     if @comment.save
-      redirect_to @comment, notice: "Comment was successfully created."
+      redirect_to @comment.topic, flash: { success: t("flash.created", resource: @comment.model_name.human) }
     else
-      render :new
+      render "comments/new"
     end
   end
 
-  # PATCH/PUT /comments/1
   def update
     if @comment.update(comment_params)
-      redirect_to @comment, notice: "Comment was successfully updated."
+      redirect_to @comment.topic, flash: { success: t("flash.updated", resource: @comment.model_name.human) }
     else
       render :edit
     end
   end
 
-  # DELETE /comments/1
   def destroy
     @comment.destroy!
-    redirect_to comments_url, notice: "Comment was successfully destroyed."
+    redirect_to @comment.topic, flash: { success: t("flash.destroyed", resource: Comment.model_name.human) }
   end
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.require(:comment).permit(:topic_id, :user_id, :content, :likes_count)
+      params.require(:comment).permit(:topic_id, :content)
     end
 end

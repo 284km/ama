@@ -8,6 +8,7 @@ ja:
     models:
       user: "ユーザー"
       topic: "トピック"
+      comment: "コメント"
     attributes:
       user:
         github_id: "GitHub UID"
@@ -19,4 +20,9 @@ ja:
         user_id: "作成者"
         title: "タイトル"
         description: "説明文"
-        comments_count: "コメント数"
+        comments_count: "コメント"
+      comment:
+        user_id: "作成者"
+        topic_id: "トピック"
+        content: "内容"
+        likes_count: "いいね"

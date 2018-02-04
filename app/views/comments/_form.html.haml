@@ -1,22 +1,9 @@
-= form_for @comment do |f|
-  - if @comment.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
-      %ul
-        - @comment.errors.full_messages.each do |msg|
-          %li= msg
+= form_with model: comment do |form|
+  = render "error_messages", messages: comment.errors.full_messages if comment.errors.any?
+  = form.hidden_field :topic_id
 
-  .field
-    = f.label :topic
-    = f.text_field :topic
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :content
-    = f.text_area :content
-  .field
-    = f.label :likes_count
-    = f.number_field :likes_count
+  .form-group
+    = form.text_area :content, class: "form-control", required: true, placeholder: Comment.human_attribute_name(:content), rows: 10
+
   .actions
-    = f.submit 'Save'
+    = form.submit class: "btn btn-dark btn-block"
