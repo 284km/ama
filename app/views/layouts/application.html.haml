@@ -11,8 +11,8 @@
     = csrf_meta_tags
   %body
     = render "navbar"
-    = render "breadcrumb"
+    = render "flash" if flash.any?
+    = render "breadcrumb" if logged_in?
 
     .container-fluid
-      = render "flash" if flash.any?
       = yield
