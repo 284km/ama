@@ -4,15 +4,14 @@ RSpec.describe "Authentication", type: :system do
   let(:user) { build(:user) }
 
   it "login" do
-    prepare_mock_auth_from(user)
-    visit login_path
-    click_link I18n.t("sessions.new.login")
+    authenticate_as(user)
     expect(page).to have_content I18n.t("flash.logged_in")
   end
 
-  it "logout" do
+  it "logout", js: true do
     authenticate_as(user)
-    click_link "logout"
+    find("#navbarDropdown").click
+    click_link I18n.t("application.navbar.logout")
     expect(page).to have_content I18n.t("flash.logged_out")
   end
 end
