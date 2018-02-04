@@ -1,5 +1,8 @@
 ja:
   application:
+    name: "AMA for Railsdm"
+    description: ""
+    keywords: ""
     navbar:
       login: "GitHubで新規登録/ログイン"
       logout: "ログアウト"

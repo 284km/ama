@@ -2,16 +2,16 @@
 %html{ lang: :ja }
   %head
     %meta{ charset: "utf-8" }
-    %meta{ name: "format-detection", content: "telephone=no" }
-    %meta{ name: "viewport",         content: "width=device-width, initial-scale=1, shrink-to-fit=no" }
-    %meta{ name: "x-ua-compatible",  content: "ie=edge" }
-    %title AMA
+    %meta{ content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport" }
+    %meta{ content: "ie=edge", "http-equiv": "x-ua-compatible" }
+    %meta{ content: "telephone=no", name: "format-detection" }
+    = display_meta_tags(default_meta_tags)
     = javascript_pack_tag "application", "data-turbolinks-track": "reload"
     = stylesheet_pack_tag "application", "data-turbolinks-track": "reload"
     = csrf_meta_tags
   %body
     = render "navbar"
-    = render "flash" if flash.any?
+    = render "flash"
     = render "breadcrumb" if logged_in?
 
     .container-fluid

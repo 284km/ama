@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  before_action :authenticate
-  helper_method :current_user, :logged_in?
+  before_action :authenticate, :set_page_meta_tags
+  helper_method :current_user, :logged_in?, :default_meta_tags
 
   private
 
@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
         session[:referer] = request.fullpath
         redirect_to login_path
       end
+    end
+
+    def set_page_meta_tags
+      @page_title = t(".title", default: "")
     end
 
     def current_user
@@ -25,5 +29,15 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
       !current_user.nil?
+    end
+
+    def default_meta_tags
+      {
+        site: t("application.name"),
+        reverse: true,
+        description: t("application.description"),
+        keywords: t("application.keywords"),
+        canonical: request.original_url,
+      }
     end
 end
