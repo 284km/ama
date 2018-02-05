@@ -5,7 +5,7 @@
     - t.column :topic_id do |comment|
       = link_to comment.topic.title, comment.topic
     - t.column :content do |comment|
-      = comment.content.truncate(24)
+      = markdown_summary comment.content
     - t.column :likes_count
     - t.column :user_id do |comment|
       = link_to comment.user.nickname, comment.user, class: "text-secondary"

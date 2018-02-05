@@ -4,7 +4,9 @@
   - t.row :id
   - t.row :topic_id do |comment|
     = link_to comment.topic.title, comment.topic
-  - t.row :content
+  - t.row :content do |comment|
+    .markdown-body
+      = markdown comment.content
   - t.row :likes_count
   - t.row :user_id do |comment|
     = link_to comment.user.nickname, comment.user, class: "text-secondary"
