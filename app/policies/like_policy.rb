@@ -1,7 +1,9 @@
 class LikePolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope
-    end
+  def create?
+    record.none? { |like| like.user_id == user.id }
+  end
+
+  def destroy?
+    record.any? { |like| like.user_id == user.id }
   end
 end
