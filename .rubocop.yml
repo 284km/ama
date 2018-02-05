@@ -7,3 +7,6 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 2.5
   TargetRailsVersion: 5.1
+
+Rails/OutputSafety:
+  Enabled: false
