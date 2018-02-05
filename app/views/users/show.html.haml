@@ -2,19 +2,33 @@
 
 .row
   .col-9
-    = table_for @comments do |t|
-      - t.column :id
-      - t.column :topic_id do |comment|
-        = link_to comment.topic.title.truncate(16), comment.topic, class: "text-dark"
-      - t.column :content do |comment|
-        = comment.content.truncate(24)
-      - t.column :likes_count
-      - t.column :created_at
-      - t.column :updated_at
-      - t.column do |comment|
-        = link_to t("shared.edit"), [:edit, comment], class: "btn btn-sm btn-dark"
-        = link_to t("shared.destroy"), comment, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
-    = paginate @comments
+    %p.h2.mb-4
+      %i.far.fa-comment-alt
+      %strong
+        = Comment.model_name.human
+        (#{@user.comments_count})
+
+    - if @comments.present?
+      = table_for @comments do |t|
+        - t.column :id
+        - t.column :topic_id do |comment|
+          = link_to_if policy(comment.topic).show?, comment.topic.title, comment.topic
+        - t.column :content do |comment|
+          = comment.content.truncate(24)
+        - t.column :likes_count
+        - t.column do |comment|
+          - if policy(comment).edit?
+            = link_to t("shared.edit"), [:edit, comment], class: "btn btn-sm btn-dark"
+          - else
+            = link_to t("shared.edit"), "javascript:void(0)", class: "btn btn-sm btn-dark disabled"
+          - if policy(comment).destroy?
+            = link_to t("shared.destroy"), comment, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
+          - else
+            = link_to t("shared.destroy"), "javascript:void(0)", class: "btn btn-sm btn-dark disabled"
+
+      = paginate @comments
+    - else
+      = render "blank_slate", resource: Comment
 
   .col-3
     = attributes_table_for @user do |t|
@@ -23,7 +37,9 @@
       - t.row :comments_count
       - t.row :likes_count
       - t.row :github_url do |user|
-        = link_to user.github_url, user.github_url, target: "_blank", class: "text-dark"
+        = link_to user.github_url, target: "_blank" do
+          %i.fas.fa-external-link-alt
+          = user.github_url
       - t.row :gravatar_url do |user|
         = image_tag user.gravatar_url, width: 40, height: 40, class: :rounded, alt: ""
       - t.row :created_at

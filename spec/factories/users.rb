@@ -11,6 +11,7 @@
 #  updated_at     :datetime         not null
 #  comments_count :integer          default(0), not null
 #  likes_count    :integer          default(0), not null
+#  admin          :boolean          default(FALSE), not null
 #
 # Indexes
 #

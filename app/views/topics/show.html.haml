@@ -2,40 +2,58 @@
 
 .row
   .col-9
-    %h1.h4
-      %strong= @topic.title
-    %hr
-    = simple_format(@topic.description)
-    %p.text-right
-      Posted by
-      = link_to @topic.user.nickname, @topic.user, class: "text-dark"
-      %span.text-muted
-        = l(@topic.updated_at)
+    .mb-5
+      %h1
+        %strong= @topic.title
+      %hr
+      = simple_format(@topic.description)
+      %p.text-right
+        Posted by
+        = link_to_if policy(@topic.user).show?, @topic.user.nickname, @topic.user, class: "text-secondary"
+        at
+        %span.text-muted
+          = l(@topic.updated_at)
 
-    %p.h4.mb-4
+    %p.h2.mb-5
       %i.far.fa-comment-alt
       %strong
         = Comment.model_name.human
         (#{@topic.comments_count})
 
-    - @comments.each do |comment|
-      = simple_format(comment.content)
-      %p.text-right
-        = link_to [comment, :likes], method: :post do
-          %i.far.fa-thumbs-up
-          #{Like.model_name.human}(#{comment.likes_count})
-        &nbsp;
-        Posted by
-        = link_to comment.user.nickname, comment.user, class: "text-dark"
-        %span.text-muted
-          = l(comment.updated_at)
-      %hr
+    - if @comments.present?
+      - @comments.each do |comment|
+        .mb-5
+          = simple_format(comment.content)
+          %p.text-right
+            - if policy(comment.likes).create?
+              = link_to [comment, :like], method: :post, class: "text-muted" do
+                %i.far.fa-thumbs-up
+                #{Like.model_name.human}(#{comment.likes_count})
+            - else
+              = link_to [comment, :like], method: :delete do
+                %i.far.fa-thumbs-up
+                %strong #{Like.model_name.human}(#{comment.likes_count})
+            &nbsp;
+            Posted by
+            = link_to_if policy(comment.user).show?, comment.user.nickname, comment.user, class: "text-secondary"
+            at
+            = l(comment.updated_at)
+            - if policy(comment).edit?
+              &nbsp;
+              = link_to t("shared.edit"), [:edit, comment], class: "text-secondary"
+            - if policy(comment).destroy?
+              |
+              = link_to t("shared.destroy"), comment, method: :delete, class: "text-secondary", data: { confirm: t("shared.confirm") }
 
-    = paginate @comments
+      = paginate @comments
+    - else
+      = render "blank_slate", resource: Comment
+
   .col-3
-    .card
-      .card-header
-        %strong
-          #{Comment.model_name.human}#{t("shared.new")}
-      .card-body
-        = render 'comments/form', comment: @topic.comments.new
+    - if policy(Comment).new?
+      .card
+        .card-header
+          %strong
+            = t("shared.card.header.new", resource: Comment.model_name.human)
+        .card-body
+          = render 'comments/form', comment: @topic.comments.new

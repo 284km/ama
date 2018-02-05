@@ -11,6 +11,7 @@
 #  updated_at     :datetime         not null
 #  comments_count :integer          default(0), not null
 #  likes_count    :integer          default(0), not null
+#  admin          :boolean          default(FALSE), not null
 #
 # Indexes
 #
@@ -22,6 +23,9 @@ class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+
+  scope :admin, -> { where(admin: true) }
+  scope :guest, -> { where(admin: false) }
 
   validates :github_id,      presence: true, uniqueness: true
   validates :email,          presence: true, email_format: true

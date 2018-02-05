@@ -2,11 +2,11 @@
 
 = attributes_table_for @comment do |t|
   - t.row :id
-  - t.row :user_id do |comment|
-    = link_to comment.user.nickname, comment.user, class: "text-dark"
   - t.row :topic_id do |comment|
-    = link_to comment.topic.title, comment.topic, class: "text-dark"
+    = link_to comment.topic.title, comment.topic
   - t.row :content
   - t.row :likes_count
+  - t.row :user_id do |comment|
+    = link_to comment.user.nickname, comment.user, class: "text-secondary"
   - t.row :created_at
   - t.row :updated_at

@@ -1,14 +1,19 @@
 - breadcrumb :resources, User
 
-= table_for @users do |t|
-  - t.column :id
-  - t.column :nickname do |user|
-    = link_to user.nickname, user, class: "text-dark"
-  - t.column :comments_count
-  - t.column :likes_count
-  - t.column :created_at
-  - t.column :updated_at
-  - t.column do |user|
-    = link_to t("shared.show"), user, class: "btn btn-sm btn-dark"
+- if @users.present?
+  = table_for @users do |t|
+    - t.column :nickname do |user|
+      = link_to_if policy(user).show?, user.nickname, user
+    - t.column :comments_count
+    - t.column :likes_count
+    - t.column :created_at
+    - t.column :updated_at
+    - t.column do |user|
+      - if policy(user).show?
+        = link_to t("shared.show"), user, class: "btn btn-sm btn-dark"
+      - else
+        = link_to t("shared.show"), "javascript:void(0)", class: "btn btn-sm btn-dark disabled"
 
-= paginate @users
+  = paginate @users
+- else
+  = render "blank_slate", resource: User
