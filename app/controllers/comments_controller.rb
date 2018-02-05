@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
+  before_action :authorize_comment, only: [:index, :new, :create]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @comments = Comment.order(id: :desc).page(params[:page])
+    @comments = Comment.eager_load(:topic, :user).order(likes_count: :desc, id: :desc).page(params[:page])
   end
 
   def show
@@ -40,8 +41,13 @@ class CommentsController < ApplicationController
 
   private
 
+    def authorize_comment
+      authorize Comment
+    end
+
     def set_comment
       @comment = Comment.find(params[:id])
+      authorize @comment
     end
 
     def comment_params

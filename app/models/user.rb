@@ -24,6 +24,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  scope :admin, -> { where(admin: true) }
+  scope :guest, -> { where(admin: false) }
+
   validates :github_id,      presence: true, uniqueness: true
   validates :email,          presence: true, email_format: true
   validates :nickname,       presence: true

@@ -12,7 +12,7 @@ crumb :new_resource do |model|
 end
 
 crumb :resource do |model|
-  link model.to_key.join, model
+  link "#{model.class.human_attribute_name(model.class.primary_key)}: #{model.to_key.join}", model
   parent :resources, model.class
 end
 

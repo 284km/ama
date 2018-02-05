@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_action :authorize_topic, only: [:index, :new, :create]
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,7 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @comments = @topic.comments.eager_load(:user).order(likes_count: :desc).page(params[:page])
+    @comments = @topic.comments.eager_load(:user, :likes).order(id: :desc).page(params[:page])
   end
 
   def new
@@ -41,8 +42,13 @@ class TopicsController < ApplicationController
 
   private
 
+    def authorize_topic
+      authorize Topic
+    end
+
     def set_topic
       @topic = Topic.find(params[:id])
+      authorize @topic
     end
 
     def topic_params

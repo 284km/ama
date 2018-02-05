@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show]
   resources :topics
   resources :comments do
-    resources :likes, only: :create
+    resource :like, only: %i[create destroy]
   end
 
   direct :github_repository do

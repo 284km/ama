@@ -1,2 +1,8 @@
 - breadcrumb :edit_resource, @comment
-= render 'form', comment: @comment
+
+.card
+  .card-header
+    %strong
+      = t("shared.card.header.edit", resource: Comment.model_name.human)
+  .card-body
+    = render 'form', comment: @comment

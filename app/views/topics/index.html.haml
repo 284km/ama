@@ -1,19 +1,29 @@
 - breadcrumb :resources, Topic
 
-= table_for @topics do |t|
-  - t.column :id
-  - t.column :title do |topic|
-    = link_to topic.title.truncate(24), topic, class: "text-dark"
-  - t.column :user_id do |topic|
-    = link_to topic.user.nickname, topic.user, class: "text-dark"
-  - t.column :comments_count
-  - t.column :created_at
-  - t.column :updated_at
-  - t.column do |topic|
-    = link_to t("shared.show"), topic, class: "btn btn-sm btn-dark"
-    = link_to t("shared.edit"), [:edit, topic], class: "btn btn-sm btn-dark"
-    = link_to t("shared.destroy"), topic, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
+- if @topics.present?
+  = table_for @topics do |t|
+    - t.column :title do |topic|
+      = link_to_if policy(topic).show?, topic.title, topic
+    - t.column :comments_count
+    - t.column :created_at
+    - t.column :updated_at
+    - t.column do |topic|
+      - if policy(topic).show?
+        = link_to t("shared.show"), topic, class: "btn btn-sm btn-dark"
+      - else
+        = link_to t("shared.show"), "javascript:void(0)", class: "btn btn-sm btn-secondary disabled"
+      - if policy(topic).edit?
+        = link_to t("shared.edit"), [:edit, topic], class: "btn btn-sm btn-dark"
+      - else
+        = link_to t("shared.edit"), "javascript:void(0)", class: "btn btn-sm btn-secondary disabled"
+      - if policy(topic).destroy?
+        = link_to t("shared.destroy"), topic, method: :delete, class: "btn btn-sm btn-dark", data: { confirm: t("shared.confirm") }
+      - else
+        = link_to t("shared.destroy"), "javascript:void(0)", class: "btn btn-sm btn-secondary disabled"
 
-= paginate @topics
+  = paginate @topics
+- else
+  = render "blank_slate", resource: Topic
 
-= link_to t("shared.new"), [:new, :topic], class: "btn btn-dark"
+- if policy(Topic).new?
+  = link_to t("shared.new"), [:new, :topic], class: "btn btn-dark"

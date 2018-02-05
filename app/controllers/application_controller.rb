@@ -6,7 +6,15 @@ class ApplicationController < ActionController::Base
   before_action :authenticate, :set_page_meta_tags
   helper_method :current_user, :logged_in?, :default_meta_tags
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   private
+
+    def user_not_authorized(exception)
+      policy_name = exception.policy.class.to_s.underscore
+      flash[:danger] = t("#{policy_name}.#{exception.query}", scope: :pundit, default: :default)
+      redirect_to(request.referer || root_path)
+    end
 
     def authenticate
       unless logged_in?
