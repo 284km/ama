@@ -31,16 +31,17 @@
       = render "blank_slate", resource: Comment
 
   .col-3
-    = attributes_table_for @user do |t|
-      - t.row :id
-      - t.row :nickname
-      - t.row :comments_count
-      - t.row :likes_count
-      - t.row :github_url do |user|
-        = link_to user.github_url, target: "_blank" do
-          %i.fas.fa-external-link-alt
-          = user.github_url
-      - t.row :gravatar_url do |user|
-        = image_tag user.gravatar_url, width: 40, height: 40, class: :rounded, alt: ""
-      - t.row :created_at
-      - t.row :updated_at
+    = cache @user do
+      = attributes_table_for @user do |t|
+        - t.row :id
+        - t.row :nickname
+        - t.row :comments_count
+        - t.row :likes_count
+        - t.row :github_url do |user|
+          = link_to user.github_url, target: "_blank" do
+            %i.fas.fa-external-link-alt
+            = user.github_url
+        - t.row :gravatar_url do |user|
+          = image_tag user.gravatar_url, width: 40, height: 40, class: :rounded, alt: ""
+        - t.row :created_at
+        - t.row :updated_at
