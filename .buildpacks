@@ -1,0 +1,3 @@
+https://github.com/rcaught/heroku-buildpack-cmake
+https://codon-buildpacks.s3.amazonaws.com/buildpacks/frederick/heroku-buildpack-ruby.tgz
+heroku/nodejs
